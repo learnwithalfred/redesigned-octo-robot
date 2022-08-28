@@ -1,24 +1,67 @@
-# README
+# Nana Ama School Management System
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![Nana Ama School Management System](app/assets/images/nana_ama.png)
 
-Things you may want to cover:
+> In this application we building a school management system using Ruby on rails. It authentication, authorizations and permissions based on roles.
 
-* Ruby version
+## Built With
 
-* System dependencies
+- Ruby
+- Ruby on Rails
+- Bootstrap
 
-* Configuration
+## Getting Started
 
-* Database creation
+To get a local copy up and running follow these simple example steps.
 
-* Database initialization
+### Prerequisites
 
-* How to run the test suite
+- Node.js version 16.4.2
+- Ruby version 3.0.2
+- Rails version 6.1.6.1
 
-* Services (job queues, cache servers, search engines, etc.)
+### Setup
 
-* Deployment instructions
+- Simply copy and paste this command into your terminal to get everything up and running
 
-* ...
+  ```
+  rvm install 3.1.2 && rvm use 3.1.2
+  gem install rails -v 6.1.6.1
+  git clone https://github.com/learnwithalfred/redesigned-octo-robot.git && cd redesigned-octo-robot
+  bundle install && yarn
+  rails db:migrate
+  rails db:seed
+  ./bin/dev
+
+  ```
+
+- Login as admin to perform all functionalities
+
+  - Email: `admin@example.com`
+  - Password: `password`
+
+- Login as student
+  - Email: `student@example.com`
+  - Password: `password`
+
+## Test
+
+Run all test with `rails test -v`
+
+## Authors
+
+👤 **Alfred Boateng**
+
+- GitHub: [@learnwithalfred](https://github.com/learnwithalfred)
+- Twitter: [@kb_alfred](https://twitter.com/kb_alfred)
+- LinkedIn: [@learnwithalfred](https://www.linkedin.com/in/learnwithalfred/)
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
