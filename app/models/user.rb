@@ -19,6 +19,9 @@ class User < ApplicationRecord
     length: { in: PASSWORD_LENGTH }
   validates :password_confirmation, presence: true, on: :create
 
+  has_one :student
+  has_many :courses
+  has_many :comments, dependent: :destroy
   before_save :to_lowercase
 
   enum role: [:user, :learner, :staff, :admin, :head_teacher, :teacher, :super_admin]
