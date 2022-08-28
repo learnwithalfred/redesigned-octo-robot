@@ -62,7 +62,6 @@ class ClassroomsController < ApplicationController
     end
   end
 
-
   def classroom_course
     @courses = @classroom.courses
     @classroom = @classroom.name
@@ -73,8 +72,8 @@ class ClassroomsController < ApplicationController
     @classroom = @classroom.name
   end
 
-
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_classroom
       @classroom = Classroom.find(params[:id])
@@ -85,13 +84,16 @@ class ClassroomsController < ApplicationController
       params.require(:classroom).permit(:name, :role)
     end
 
+    def in_classroom
+      current_user.student.classroom.id? &&
+      current_user.student.classroom.id == params[:id]
+    end
+
     def require_classroom_permission
       unless current_user.admin? ||
              current_user.super_admin? ||
              current_user.teacher? ||
-             current_user.role == "learner" 
-             && current_user.student.classroom.id != nil 
-             && current_user.student.classroom.id == params[:id]
+             current_user.role == "learner" && in_classroom
         flash[:danger] = "You do not have permission to attend this class"
         if current_user.role == "learner" && current_user.student.classroom.id != nil
           redirect_to "/classrooms/#{current_user.student.classroom.id}"
@@ -100,7 +102,4 @@ class ClassroomsController < ApplicationController
         end
       end
     end
-
-
-
 end
