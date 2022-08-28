@@ -4,7 +4,10 @@ require "test_helper"
 
 class SubjectsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @subject = Subject.create(name: "first subject")
+    @subject = Subject.create(
+      name: "test subject"
+    )
+
   end
 
   test "should get index" do
@@ -19,7 +22,7 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create subject" do
     assert_difference("Subject.count") do
-      post subjects_url, params: { subject: { name: @subject.name } }
+      post subjects_url, params: { subject: { name: "test subject 2" } }
     end
 
     assert_redirected_to subject_url(Subject.last)
@@ -36,7 +39,7 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update subject" do
-    patch subject_url(@subject), params: { subject: { name: @subject.name } }
+    patch subject_url(@subject), params: { subject: { name: "test subject 3" } }
     assert_redirected_to subject_url(@subject)
   end
 
@@ -46,5 +49,13 @@ class SubjectsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to subjects_url
+  end
+
+  def test_subject_must_have_name
+    assert_difference("Subject.count", 0) do
+      post subjects_url, params: { subject: { name: "" } }
+    end
+
+    assert_response :unprocessable_entity
   end
 end
