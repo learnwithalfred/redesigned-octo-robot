@@ -2,6 +2,7 @@
 
 class AnnouncementsController < ApplicationController
   before_action :set_announcement, only: %i[ show edit update destroy ]
+  before_action :is_school_admin, except: %i[ index show]
 
   # GET /announcements or /announcements.json
   def index

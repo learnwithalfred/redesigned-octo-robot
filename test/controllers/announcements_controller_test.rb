@@ -4,7 +4,10 @@ require "test_helper"
 
 class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
   setup do
-
+    @user = User.create(
+      name: "John Doe", email: "admin@doe.com", password: "welcome", password_confirmation: "welcome",
+      role: "admin", gender: "male", address: "ksi")
+    sign_in(@user)
     @announcement = Announcement.create(
       title: "test title",
       content: "test content"

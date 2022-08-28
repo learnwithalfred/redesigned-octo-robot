@@ -4,6 +4,11 @@ require "test_helper"
 
 class SubjectsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @user = User.create(
+      name: "John Doe", email: "admin@doe.com", password: "welcome", password_confirmation: "welcome",
+      role: "admin", gender: "male", address: "ksi")
+    sign_in(@user)
+
     @subject = Subject.create(
       name: "test subject"
     )
