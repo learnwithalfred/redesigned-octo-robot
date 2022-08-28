@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class SubjectsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @subject = Subject.create(name:"first subject")
+    @subject = Subject.create(name: "first subject")
   end
 
   test "should get index" do

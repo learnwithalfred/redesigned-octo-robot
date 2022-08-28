@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SubjectsController < ApplicationController
   before_action :set_subject, only: %i[ show edit update destroy ]
 
@@ -58,6 +60,7 @@ class SubjectsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_subject
       @subject = Subject.find(params[:id])
