@@ -12,6 +12,8 @@ class AnnouncementsController < ApplicationController
 
   # GET /announcements/1 or /announcements/1.json
   def show
+    announcement = Announcement.find(params[:id])
+    render status: :ok, json: { announcement: announcement }
   end
 
   # POST /announcements or /announcements.json

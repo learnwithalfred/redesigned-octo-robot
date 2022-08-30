@@ -8,6 +8,7 @@ json.course do
   json.title @course.title
   json.created_at @course.created_at
   json.updated_at @course.updated_at
+  json.content @course.content
 
   json.subject do
     json.extract! @course.subject,
@@ -30,6 +31,12 @@ json.course do
       :id,
       :content,
       :created_at
+
+    json.user do
+      json.extract! comment.user,
+        :id,
+        :name
+    end
   end
 end
 

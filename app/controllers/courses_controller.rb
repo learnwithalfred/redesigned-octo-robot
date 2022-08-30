@@ -11,7 +11,6 @@ class CoursesController < ApplicationController
     render status: :ok, json: courses.to_json(include: [:classroom, :subject, :user])
   end
 
-  # GET /courses/1 or /courses/1.json
   def show
   end
 

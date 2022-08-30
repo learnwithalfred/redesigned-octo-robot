@@ -82,3 +82,4 @@ group :test do
 end
 gem "devise"
 gem "devise-bootstrap-views", "~> 1.0"
+gem "fast_jsonapi"
