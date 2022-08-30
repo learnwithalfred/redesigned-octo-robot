@@ -1,25 +1,17 @@
 # frozen_string_literal: true
 
 class AnnouncementsController < ApplicationController
-  before_action :set_announcement, only: %i[ show edit update destroy ]
-  before_action :is_school_admin, except: %i[ index show]
+  before_action :set_announcement, only: %i[ show update destroy ]
+  # before_action :is_school_admin, except: %i[ index show]
 
   # GET /announcements or /announcements.json
   def index
-    @announcements = Announcement.all
+    announcements = Announcement.all.order("created_at DESC")
+    render status: :ok, json: { announcements: announcements }
   end
 
   # GET /announcements/1 or /announcements/1.json
   def show
-  end
-
-  # GET /announcements/new
-  def new
-    @announcement = Announcement.new
-  end
-
-  # GET /announcements/1/edit
-  def edit
   end
 
   # POST /announcements or /announcements.json

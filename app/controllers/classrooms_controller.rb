@@ -2,26 +2,17 @@
 
 class ClassroomsController < ApplicationController
   before_action :set_classroom, except: %i[ index new create]
-  before_action :authenticate_user!
-  before_action :require_classroom_permission, except: %i[ show classroom_course classroom_students]
-  before_action :is_school_admin, only: %i[ new create update destroy]
+  # before_action :authenticate_user!
+  # before_action :require_classroom_permission, except: %i[ show classroom_course classroom_students]
+  # before_action :is_school_admin, only: %i[ new create update destroy]
 
   # GET /classrooms or /classrooms.json
   def index
-    @classrooms = Classroom.all
+    classrooms = Classroom.all
+    render status: :ok, json: classrooms.to_json()
   end
 
-  # GET /classrooms/1 or /classrooms/1.json
   def show
-  end
-
-  # GET /classrooms/new
-  def new
-    @classroom = Classroom.new
-  end
-
-  # GET /classrooms/1/edit
-  def edit
   end
 
   # POST /classrooms or /classrooms.json

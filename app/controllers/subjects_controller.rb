@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class SubjectsController < ApplicationController
-  before_action :set_subject, only: %i[ show edit update destroy ]
-  before_action :is_school_admin, except: %i[ index show]
+  # before_action :set_subject, only: %i[ show edit update destroy ]
+  # before_action :is_school_admin, except: %i[ index show]
 
   # GET /subjects or /subjects.json
   def index

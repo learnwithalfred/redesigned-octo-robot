@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :comments
-  resources :courses
-  resources :students
-  resources :classrooms
-  devise_for :users
-  get "homepage/index"
-  resources :announcements
-  resources :subjects
+  defaults format: :json do
+     resources :comments, except: %i[new edit], param: :id
+     resources :courses, except: %i[new edit], param: :id
+     resources :students, except: %i[new edit], param: :id
+     resources :classrooms, except: %i[new edit], param: :id
+     devise_for :users, except: %i[new edit], param: :id
+     resources :announcements, except: %i[new edit], param: :id
+     resources :subjects, except: %i[new edit], param: :id
+   end
   resources :homes
 
   get "classrooms/:id/courses", to: "classrooms#classroom_course"
