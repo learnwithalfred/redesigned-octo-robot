@@ -2,16 +2,19 @@
 
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[ show edit update destroy ]
-  before_action :is_school_admin, except: %i[ index show]
-  before_action :authenticate_user!
+  # before_action :is_school_admin, except: %i[ index show]
+  # before_action :authenticate_user!
 
   # GET /students or /students.json
   def index
-    @students = Student.all
+    students = Student.all
+    render status: :ok, json: students.to_json(include: [:user, :classroom])
   end
 
   # GET /students/1 or /students/1.json
   def show
+    student = Student.find(params[:id])
+    render status: :ok, json: student.to_json(include: [:user, :classroom])
   end
 
   # GET /students/new

@@ -1,40 +1,26 @@
 # frozen_string_literal: true
 
 class SubjectsController < ApplicationController
-  before_action :set_subject, only: %i[ show edit update destroy ]
-  before_action :is_school_admin, except: %i[ index show]
+  # before_action :set_subject, only: %i[ show edit update destroy ]
+  # before_action :is_school_admin, except: %i[ index show]
 
   # GET /subjects or /subjects.json
   def index
-    @subjects = Subject.all
+    subjects = Subject.all.order("name asc")
+    render status: :ok, json: subjects.to_json
   end
 
   # GET /subjects/1 or /subjects/1.json
   def show
-  end
-
-  # GET /subjects/new
-  def new
-    @subject = Subject.new
-  end
-
-  # GET /subjects/1/edit
-  def edit
+    subject = Subject.find(params[:id])
+    render status: :ok, json: subject.to_json
   end
 
   # POST /subjects or /subjects.json
   def create
-    @subject = Subject.new(subject_params)
-
-    respond_to do |format|
-      if @subject.save
-        format.html { redirect_to subject_url(@subject), notice: "Subject was successfully created." }
-        format.json { render :show, status: :created, location: @subject }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @subject.errors, status: :unprocessable_entity }
-      end
-    end
+    subject = Subject.new(subject_params)
+    subject.save!
+    render status: :ok, json: { notice: "Subject was successfully created." }
   end
 
   # PATCH/PUT /subjects/1 or /subjects/1.json

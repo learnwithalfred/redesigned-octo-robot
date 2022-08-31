@@ -2,42 +2,25 @@
 
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
-  before_action :is_school_admin, except: %i[ index show]
-  before_action :authenticate_user!
+  # before_action :is_school_admin, except: %i[ index show]
+  # before_action :authenticate_user!
 
   # GET /courses or /courses.json
   def index
-    @courses = Course.all
+    courses = Course.all.order("created_at asc")
+    render status: :ok, json: courses.to_json(include: [:classroom, :subject, :user])
   end
 
-  # GET /courses/1 or /courses/1.json
   def show
-    @comments = @course.comments.includes(:user)
-
-    @comment = @course.comments.build
-  end
-
-  # GET /courses/new
-  def new
-    @course = Course.new
-  end
-
-  # GET /courses/1/edit
-  def edit
   end
 
   # POST /courses or /courses.json
   def create
     @course = current_user.courses.new(course_params)
-
-    respond_to do |format|
-      if @course.save
-        format.html { redirect_to course_url(@course), notice: "Course was successfully created." }
-        format.json { render :show, status: :created, location: @course }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
-      end
+    if @course.save
+      render :show, status: :created, location: @course
+    else
+      render json: @course.errors, status: :unprocessable_entity
     end
   end
 

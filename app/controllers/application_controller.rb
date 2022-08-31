@@ -1,8 +1,15 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  # protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_cors
+  skip_before_action :verify_authenticity_token
+
+  def set_cors
+    headers["Access-Control-Allow-Origin"] = "*"
+    headers["Access-Control-Request-Method"] = "*"
+  end
 
   def is_school_admin
     unless current_user.admin? || current_user.super_admin? || current_user.teacher? || current_user.staff?
