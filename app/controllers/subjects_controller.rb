@@ -20,7 +20,8 @@ class SubjectsController < ApplicationController
   def create
     subject = Subject.new(subject_params)
     subject.save!
-    render status: :ok, json: { notice: t(t("successfully_created", entity: "Subject")) }
+
+    respond_with_success(t("successfully_created", entity: "Subject"))
   end
 
   # PATCH/PUT /subjects/1 or /subjects/1.json
