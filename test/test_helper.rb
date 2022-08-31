@@ -20,7 +20,6 @@ require "rails/test_help"
 
 class ActiveSupport::TestCase
   include ActionView::Helpers::TranslationHelper
-  include Devise::Test::IntegrationHelpers
   include FactoryBot::Syntax::Methods
   parallelize(workers: :number_of_processors) unless ENV["COVERAGE"]
 

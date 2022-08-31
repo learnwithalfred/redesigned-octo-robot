@@ -6,7 +6,6 @@ Rails.application.routes.draw do
      resources :courses, except: %i[new edit], param: :id
      resources :students, except: %i[new edit], param: :id
      resources :classrooms, except: %i[new edit], param: :id
-     devise_for :users, except: %i[new edit], param: :id
      resources :announcements, except: %i[new edit], param: :id
      resources :subjects, except: %i[new edit], param: :id
    end

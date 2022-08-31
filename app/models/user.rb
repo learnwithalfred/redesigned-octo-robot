@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  VALID_EMAIL_REGEX = /\A[^@\s]+@[^@\s]+\z/
-  MAX_EMAIL_LENGTH = 50
+  VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
+  MAX_EMAIL_LENGTH = 255
   PASSWORD_LENGTH = 6..50
   MAX_NAME_LENGTH = 35
 
@@ -23,17 +23,14 @@ class User < ApplicationRecord
   has_many :courses
   has_many :comments, dependent: :destroy
   before_save :to_lowercase
+  has_secure_password
+  has_secure_token :authentication_token
 
   enum role: [:user, :learner, :staff, :admin, :head_teacher, :teacher, :super_admin]
   after_initialize :set_default_role, if: :new_record?
   def set_default_role # set default role to user  if not set
     self.role ||= :user
   end
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :validatable
 
   private
 

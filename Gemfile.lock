@@ -97,7 +97,6 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-bootstrap-views (1.1.0)
     digest (3.1.0)
     docile (1.4.0)
     erubi (1.11.0)
@@ -108,8 +107,6 @@ GEM
       railties (>= 5.0.0)
     faker (2.22.0)
       i18n (>= 1.8.11, < 2)
-    fast_jsonapi (1.5)
-      activesupport (>= 4.2)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -278,15 +275,14 @@ PLATFORMS
   x86_64-darwin-21
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   capybara
   cssbundling-rails
   debug
   devise
-  devise-bootstrap-views (~> 1.0)
   factory_bot_rails
   faker
-  fast_jsonapi
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
