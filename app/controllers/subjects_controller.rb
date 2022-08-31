@@ -18,17 +18,9 @@ class SubjectsController < ApplicationController
 
   # POST /subjects or /subjects.json
   def create
-    @subject = Subject.new(subject_params)
-
-    respond_to do |format|
-      if @subject.save
-        format.html { redirect_to subject_url(@subject), notice: "Subject was successfully created." }
-        format.json { render :show, status: :created, location: @subject }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @subject.errors, status: :unprocessable_entity }
-      end
-    end
+    subject = Subject.new(subject_params)
+    subject.save!
+    render status: :ok, json: { notice: "Subject was successfully created." }
   end
 
   # PATCH/PUT /subjects/1 or /subjects/1.json
