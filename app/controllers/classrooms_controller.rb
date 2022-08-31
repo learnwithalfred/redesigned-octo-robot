@@ -8,8 +8,8 @@ class ClassroomsController < ApplicationController
 
   # GET /classrooms or /classrooms.json
   def index
-    classrooms = Classroom.all
-    render status: :ok, json: classrooms.to_json()
+    classrooms = Classroom.all.order("role asc")
+    render status: :ok, json: classrooms.to_json(except: %i[ created_at updated_at])
   end
 
   def show
