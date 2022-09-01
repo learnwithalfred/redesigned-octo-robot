@@ -8,6 +8,8 @@ Rails.application.routes.draw do
      resources :classrooms, except: %i[new edit], param: :id
      resources :announcements, except: %i[new edit], param: :id
      resources :subjects, except: %i[new edit], param: :id
+     resources :users, only: %i[index create]
+     resource :session, only: [:create, :destroy]
    end
   resources :homes
 
