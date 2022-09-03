@@ -7,8 +7,13 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
-    courses = Course.all.order("created_at asc")
-    render status: :ok, json: courses.to_json(include: [:classroom, :subject, :user])
+    @courses = Course.paginate(page: params[:page], per_page: 10)
+    render status: :ok,
+      json: {
+        courses: @courses,
+        page: @courses.current_page,
+        pages: @courses.total_pages
+      }
   end
 
   def show
@@ -56,6 +61,10 @@ class CoursesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:classroom_id, :subject_id, :course_date, :status, :title, :content)
+      params.require(:course)
+        .permit(
+          :classroom_id,
+          :subject_id,
+          :course_date, :status, :title, :content)
     end
 end

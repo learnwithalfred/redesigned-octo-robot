@@ -82,3 +82,4 @@ group :test do
 end
 
 gem "rack-cors", require: "rack/cors"
+gem "will_paginate", "~> 3.3"

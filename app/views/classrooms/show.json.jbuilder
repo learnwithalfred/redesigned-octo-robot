@@ -5,13 +5,20 @@ json.classroom do
   json.students @classroom.students do |student|
     json.extract! student,
       :id,
-      :dob
+      :dob,
+      :contact
+
       json.user do
         json.extract! student.user,
           :id,
           :name,
           :email,
           :address
+      end
+      json.classroom do
+        json.extract! student.classroom,
+          :id,
+          :name
       end
   end
 
