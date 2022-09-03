@@ -14,7 +14,6 @@ class Course < ApplicationRecord
   validates :course_date, presence: true
 
   validates :status, presence: true, inclusion: { in: %w(pending active archived) }
-  has_rich_text :content
 
   validates :user_id, presence: true
   validates :classroom_id, presence: true
