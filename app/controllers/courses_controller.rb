@@ -21,12 +21,12 @@ class CoursesController < ApplicationController
 
   # POST /courses or /courses.json
   def create
-    @course = current_user.courses.new(course_params)
-    if @course.save
-      render :show, status: :created, location: @course
-    else
-      render json: @course.errors, status: :unprocessable_entity
-    end
+    course = Course.new(course_params)
+    course.save!
+    render status: :created, json: {
+      course: course,
+      notice: "Task was successfully created"
+    }
   end
 
   # PATCH/PUT /courses/1 or /courses/1.json
@@ -65,6 +65,11 @@ class CoursesController < ApplicationController
         .permit(
           :classroom_id,
           :subject_id,
-          :course_date, :status, :title, :content)
+          :course_date,
+          :status,
+          :title,
+          :content,
+          :user_id
+        )
     end
 end

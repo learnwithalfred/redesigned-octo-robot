@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SubjectsController < ApplicationController
-  # before_action :set_subject, only: %i[ show edit update destroy ]
+  before_action :set_subject, only: %i[ show edit update destroy ]
   # before_action :is_school_admin, except: %i[ index show]
 
   # GET /subjects or /subjects.json
@@ -12,12 +12,12 @@ class SubjectsController < ApplicationController
 
   # GET /subjects/1 or /subjects/1.json
   def show
-    subject = Subject.find(params[:id])
-    render status: :ok, json: subject.to_json
+    render status: :ok, json: @subject.to_json
   end
 
   # POST /subjects or /subjects.json
   def create
+    binding.break
     subject = Subject.new(subject_params)
     subject.save!
 
@@ -26,15 +26,9 @@ class SubjectsController < ApplicationController
 
   # PATCH/PUT /subjects/1 or /subjects/1.json
   def update
-    respond_to do |format|
-      if @subject.update(subject_params)
-        format.html { redirect_to subject_url(@subject), notice: "Subject was successfully updated." }
-        format.json { render :show, status: :ok, location: @subject }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @subject.errors, status: :unprocessable_entity }
-      end
-    end
+    binding.break
+    @subject.update!(subject_params)
+    respond_with_success(t("successfully_updated"))
   end
 
   # DELETE /subjects/1 or /subjects/1.json

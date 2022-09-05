@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotUnique, with: :handle_record_not_unique
   rescue_from ActionController::ParameterMissing, with: :handle_api_error
 
+  include ActionView::Helpers::TranslationHelper
+
   private
 
     def set_cors
