@@ -18,39 +18,19 @@ class ClassroomsController < ApplicationController
   # POST /classrooms or /classrooms.json
   def create
     @classroom = Classroom.new(classroom_params)
-
-    respond_to do |format|
-      if @classroom.save
-        format.html { redirect_to classroom_url(@classroom), notice: "Classroom was successfully created." }
-        format.json { render :show, status: :created, location: @classroom }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @classroom.errors, status: :unprocessable_entity }
-      end
-    end
+    @classroom.save!
+    respond_with_success(t("successfully_created", entity: "Classroom"))
   end
 
-  # PATCH/PUT /classrooms/1 or /classrooms/1.json
   def update
-    respond_to do |format|
-      if @classroom.update(classroom_params)
-        format.html { redirect_to classroom_url(@classroom), notice: "Classroom was successfully updated." }
-        format.json { render :show, status: :ok, location: @classroom }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @classroom.errors, status: :unprocessable_entity }
-      end
-    end
+    @classroom.update!(classroom_params)
+    respond_with_success(t("successfully_updated", entity: "Classroom"))
   end
 
   # DELETE /classrooms/1 or /classrooms/1.json
   def destroy
     @classroom.destroy
-
-    respond_to do |format|
-      format.html { redirect_to classrooms_url, notice: "Classroom was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    respond_with_json
   end
 
   def classroom_course
