@@ -20,7 +20,7 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, on: :create
 
   has_one :student
-  has_many :courses
+  has_many :courses, dependent: :destroy
   has_many :comments, dependent: :destroy
   before_save :to_lowercase
   has_secure_password

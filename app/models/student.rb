@@ -9,6 +9,6 @@ class Student < ApplicationRecord
   validates :father, presence: true
   validates :mother, presence: true
 
-  belongs_to :user
-  belongs_to :classroom
+  belongs_to :user, dependent: :destroy
+  belongs_to :classroom, dependent: :destroy
 end

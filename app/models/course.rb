@@ -4,9 +4,9 @@ class Course < ApplicationRecord
   MIN_LENGTH = 3
   MAX_LENGTH = 255
 
-  belongs_to :user
-  belongs_to :classroom
-  belongs_to :subject
+  belongs_to :user, dependent: :destroy
+  belongs_to :classroom, dependent: :destroy
+  belongs_to :subject, dependent: :destroy
   has_many :comments, dependent: :destroy
 
   validates :title, presence: true, length: { minimum: MIN_LENGTH, maximum: MAX_LENGTH }
