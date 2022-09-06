@@ -14,7 +14,6 @@ class SubjectsController < ApplicationController
   end
 
   def create
-    binding.break
     subject = Subject.new(subject_params)
     subject.save!
 

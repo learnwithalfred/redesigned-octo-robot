@@ -11,57 +11,25 @@ class StudentsController < ApplicationController
     render status: :ok, json: students.to_json(include: [:user, :classroom])
   end
 
-  # GET /students/1 or /students/1.json
   def show
     student = Student.find(params[:id])
     render status: :ok, json: student.to_json(include: [:user, :classroom])
   end
 
-  # GET /students/new
-  def new
-    @student = Student.new
-  end
-
-  # GET /students/1/edit
-  def edit
-  end
-
-  # POST /students or /students.json
   def create
     @student = Student.new(student_params)
+    @student.save!
+    respond_with_success(t("successfully_created", entity: "Student"))
+   end
 
-    respond_to do |format|
-      if @student.save
-        format.html { redirect_to student_url(@student), notice: "Student was successfully created." }
-        format.json { render :show, status: :created, location: @student }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /students/1 or /students/1.json
   def update
-    respond_to do |format|
-      if @student.update(student_params)
-        format.html { redirect_to student_url(@student), notice: "Student was successfully updated." }
-        format.json { render :show, status: :ok, location: @student }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
-      end
-    end
+    @student.update!(student_params)
+    respond_with_success(t("successfully_updated", entity: "Student"))
   end
 
-  # DELETE /students/1 or /students/1.json
   def destroy
-    @student.destroy
-
-    respond_to do |format|
-      format.html { redirect_to students_url, notice: "Student was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    @student.destroy!
+    respond_with_json
   end
 
   private
@@ -71,7 +39,6 @@ class StudentsController < ApplicationController
       @student = Student.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def student_params
       params.require(:student).permit(:dob, :contact, :father, :mother, :about, :user_id, :classroom_id)
     end
